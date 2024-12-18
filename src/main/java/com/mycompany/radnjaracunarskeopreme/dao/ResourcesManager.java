@@ -10,14 +10,14 @@ import com.mycompany.radnjaracunarskeopreme.exception.RadnjaRacunarskeOpremeExce
 public class ResourcesManager {
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     public static Connection getConnection() throws SQLException {
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/online_shop?user=root&password=");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/radnja_racunarske_opreme?user=root&password=&useSSL=false&serverTimezone=UTC");
         return con;
     }
 

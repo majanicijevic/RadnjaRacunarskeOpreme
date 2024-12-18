@@ -12,7 +12,7 @@ public class SearchService {
     private SearchDao searchDao;
 
     public SearchService(SearchDao searchDAO) {
-        this.searchDao = searchDao;
+        this.searchDao = searchDAO;
     }
 
     public Search createSearch(Search search) throws SQLException {
