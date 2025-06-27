@@ -20,8 +20,8 @@ public class UserRest {
     public UserRest() {
         try {
             Connection connection = ResourcesManager.getConnection(); // Korišćenje ResourcesManager-a
-            UserDao userDao = new UserDao(connection);
-            this.userService = new UserService(userDao);
+            UserDao userDao = UserDao.getInstance(connection);
+            this.userService = UserService.getInstance(userDao);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Неуспешно повезивање са базом података", e);

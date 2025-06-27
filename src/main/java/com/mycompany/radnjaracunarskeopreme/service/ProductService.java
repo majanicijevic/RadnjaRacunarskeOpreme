@@ -8,10 +8,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ProductService {
+    private static ProductService instance;
     private ProductDao productDao;
 
-    public ProductService(ProductDao productDAO) {
+    private ProductService(ProductDao productDAO) {
         this.productDao = productDAO;
+    }
+    
+    // Singleton pristup
+    public static ProductService getInstance(ProductDao productDao) {
+        if (instance == null) {
+            instance = new ProductService(productDao);
+        }
+        return instance;
     }
 
     public Product createProduct(Product product) throws SQLException {

@@ -4,10 +4,18 @@ import com.mycompany.radnjaracunarskeopreme.data.*;
 import java.sql.*;
 
 public class SearchSettingsDao {
+    private static SearchSettingsDao instance;
     private Connection connection;
 
-    public SearchSettingsDao(Connection connection) {
+    private SearchSettingsDao(Connection connection) {
         this.connection = connection;
+    }
+    
+    public static SearchSettingsDao getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new SearchSettingsDao(connection);
+        }
+        return instance;
     }
     
     public SearchSettings find(int id) throws SQLException {

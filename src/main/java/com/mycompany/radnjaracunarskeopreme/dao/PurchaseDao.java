@@ -4,10 +4,18 @@ import com.mycompany.radnjaracunarskeopreme.data.*;
 import java.sql.*;
 
 public class PurchaseDao {
+    private static PurchaseDao instance;
     private Connection connection;
 
-    public PurchaseDao(Connection connection) {
+    private PurchaseDao(Connection connection) {
         this.connection = connection;
+    }
+    
+    public static PurchaseDao getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new PurchaseDao(connection);
+        }
+        return instance;
     }
     
     public Purchase find(int id) throws SQLException {

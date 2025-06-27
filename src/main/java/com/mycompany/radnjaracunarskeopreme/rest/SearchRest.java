@@ -21,8 +21,8 @@ public class SearchRest {
         try {
             // Korišćenje ResourcesManager za upravljanje konekcijom
             Connection connection = ResourcesManager.getConnection();
-            SearchDao searchDao = new SearchDao(connection);
-            this.searchService = new SearchService(searchDao);
+            SearchDao searchDao = SearchDao.getInstance(connection);
+            this.searchService = SearchService.getInstance(searchDao);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Неуспешно повезивање са базом података", e);

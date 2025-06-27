@@ -22,10 +22,10 @@ public class PurchaseRest {
         try {
             // Korišćenje ResourcesManager za kreiranje konekcije
             Connection connection = ResourcesManager.getConnection();
-            this.purchaseService = new PurchaseService(
-                new PurchaseDao(connection),
-                new ProductDao(connection),
-                new UserDao(connection),
+            this.purchaseService = PurchaseService.getInstance(
+                PurchaseDao.getInstance(connection),
+                ProductDao.getInstance(connection),
+                UserDao.getInstance(connection),
                 connection
             );
         } catch (SQLException e) {

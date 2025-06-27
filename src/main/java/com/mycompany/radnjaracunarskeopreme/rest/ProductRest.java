@@ -20,8 +20,8 @@ public class ProductRest {
     public ProductRest() {
         try {
             Connection connection = ResourcesManager.getConnection(); // Korišćenje ResourcesManager-a
-            ProductDao productDao = new ProductDao(connection);
-            this.productService = new ProductService(productDao);
+            ProductDao productDao = ProductDao.getInstance(connection);
+            this.productService = ProductService.getInstance(productDao);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Неуспешно повезивање са базом података", e);

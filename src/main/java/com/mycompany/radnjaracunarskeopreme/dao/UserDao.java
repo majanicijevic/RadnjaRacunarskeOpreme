@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
+    private static UserDao instance;
     private Connection connection;
 
-    public UserDao(Connection connection) {
+    private UserDao(Connection connection) {
         this.connection = connection;
+    }
+    
+    public static UserDao getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new UserDao(connection);
+        }
+        return instance;
     }
 
     public User find(int id) throws SQLException {

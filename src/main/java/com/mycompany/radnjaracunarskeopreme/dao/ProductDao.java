@@ -6,10 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao {
+    private static ProductDao instance;
     private Connection connection;
 
-    public ProductDao(Connection connection) {
+    private ProductDao(Connection connection) {
         this.connection = connection;
+    }
+    
+    // Singleton pristup
+    public static ProductDao getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new ProductDao(connection);
+        }
+        return instance;
     }
 
     public Product find(int id) throws SQLException {

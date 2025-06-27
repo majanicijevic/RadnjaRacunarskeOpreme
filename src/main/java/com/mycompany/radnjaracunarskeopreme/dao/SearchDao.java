@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchDao {
+    private static SearchDao instance;
     private Connection connection;
 
-    public SearchDao(Connection connection) {
+    private SearchDao(Connection connection) {
         this.connection = connection;
+    }
+    
+    public static SearchDao getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new SearchDao(connection);
+        }
+        return instance;
     }
     
     public Search find(int id) throws SQLException {

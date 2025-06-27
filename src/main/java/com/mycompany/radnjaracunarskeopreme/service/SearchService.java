@@ -9,10 +9,18 @@ import java.util.List;
 
 
 public class SearchService {
+    private static SearchService instance;
     private SearchDao searchDao;
 
-    public SearchService(SearchDao searchDAO) {
+    private SearchService(SearchDao searchDAO) {
         this.searchDao = searchDAO;
+    }
+    
+    public static SearchService getInstance(SearchDao searchDao) {
+        if (instance == null) {
+            instance = new SearchService(searchDao);
+        }
+        return instance;
     }
 
     public Search createSearch(Search search) throws SQLException {

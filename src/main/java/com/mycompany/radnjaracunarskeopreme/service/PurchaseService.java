@@ -12,16 +12,25 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class PurchaseService {
+    private static PurchaseService instance;
     private PurchaseDao purchaseDAO;
     private ProductDao productDAO;
     private UserDao userDAO;
     private Connection connection;
 
-    public PurchaseService(PurchaseDao purchaseDAO, ProductDao productDAO, UserDao userDAO, Connection connection) {
+    private PurchaseService(PurchaseDao purchaseDAO, ProductDao productDAO, UserDao userDAO, Connection connection) {
         this.purchaseDAO = purchaseDAO;
         this.productDAO = productDAO;
         this.userDAO = userDAO;
         this.connection = connection;
+    }
+    
+    // Singleton pristup
+    public static PurchaseService getInstance(PurchaseDao purchaseDAO, ProductDao productDAO, UserDao userDAO, Connection connection) {
+        if (instance == null) {
+            instance = new PurchaseService(purchaseDAO, productDAO, userDAO, connection);
+        }
+        return instance;
     }
 
     public void makePurchase(int userId, int productId) throws SQLException {

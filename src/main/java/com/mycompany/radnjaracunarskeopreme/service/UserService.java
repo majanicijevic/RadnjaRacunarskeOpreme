@@ -8,10 +8,18 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
+    private static UserService instance;
     private UserDao userDao;
 
-    public UserService(UserDao userDAO) {
+    private UserService(UserDao userDAO) {
         this.userDao = userDAO;
+    }
+    
+    public static UserService getInstance(UserDao userDao) {
+        if (instance == null) {
+            instance = new UserService(userDao);
+        }
+        return instance;
     }
 
     public User createUser(User user) throws SQLException {
